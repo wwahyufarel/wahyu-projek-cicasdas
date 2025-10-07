@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Daftar Kepegawaian</title>
+    <link rel="stylesheet" href="Kepegawaian.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Search box kecil di kanan atas tabel */
+      .search-container {
+        text-align: right;
+        margin-bottom: 10px;
+      }
+      .search-container input {
+        padding: 3px;
+        font-size: 12px;
+      }
+      .search-container button {
+        padding: 3px 8px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      /* Modal Grafik */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .modal-content {
+        background: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 1000px;
+      }
+      .close {
+        float: right;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      /* Grafik tersusun vertikal ke bawah */
+      .chart-box {
+        text-align: center;
+        display: block;        /* ubah dari inline-block */
+        width: 100%;           /* biar penuh ke bawah */
+        margin: 20px auto;     /* jarak antar grafik */
+      }
+      .chart-box canvas {
+        max-width: 300px !important;
+        max-height: 300px !important;
+        margin: 0 auto;
+      }
+      .chart-box h3 {
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      /* Grafik usia bisa sedikit lebih besar */
+      .chart-box.big canvas {
+        max-width: 320px !important;
+        max-height: 320px !important;
+      }
+      .chart-info {
+        font-size: 12px;
+        margin-top: 10px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================== HERO DAN MENU TIDAK DIUBAH ================== -->
+    <div class="hero">
+      <div class="hero-content">
+        <h1>DAFTAR KEPEGAWAIAN</h1>
+        <h2>Petugas OP WIL II</h2>
+      </div>
+
+      <!-- Tombol menu -->
+      <div class="menu">
+        <button><a href="PunaKiri.html">Puna kiri</a></button>
+        <button><a href="Karopa.html">Karopa</a></button>
+        <button><a href="Bakung.Html">Bakung</a></button>
+        <button><a href="Ungkaya.html">Ungkaya</a></button>
+        <button><a href="Gintu.html">Gintu</a></button>
+        <button><a href="dongin.html">Dongin</a></button>
+        <button><a href="Tolisu.html">Tolisu</a></button>
+        <button><a href="Toili.html">Toili</a></button>
+        <button><a href="Moilong.html">Moilong</a></button>
+        <button><a href="Karongkasa.html">Karongkasa</a></button>
+        <button><a href="Saroso.html">Saroso</a></button>
+        <button><a href="BellaBunta.html">Bella bunta</a></button>
+        <button><a href="Tamboyali.html">Tamboyali</a></button>
+        <button><a href="Waromala.html">Waromala</a></button>
+        <button><a href="Grafik.keseluruhan.html">GRAFIK KESELURUHAN</a>
+      </div>
+    </div>
+
+    <!-- ================== TABLE KEPEGAWAIAN (TIDAK DIUBAH) ================== -->
+    <section class="table-section">
+      <h2>Data Pegawai(DONGIN)</h2>
+      <div style="margin-bottom: 10px">
+        <button
+          onclick="openModal()"
+          style="
+            padding: 6px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: none;
+            background-color: #564caf;
+            color: white;
+          "
+        >
+          Grafik
+        </button>
+      </div>
+
+      <!-- Search Box -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari Nama pegawai ..."
+        />
+        <button onclick="searchTable()">Search</button>
+        <button
+          onclick="resetTable()"
+          style="padding: 4px 8px; font-size: 12px"
+        >
+          Reset
+        </button>
+      </div>
+
+      <!-- ================== TABEL PEGAWAI (isi Anda tetap) ================== -->
+      <div class="table-container">
+        <table class="table-dongin" id="pegawaiTable">
+          <thead>
+            <tr>
+              <th rowspan="2">NO</th>
+              <th rowspan="2">NAMA</th>
+              <th rowspan="2">TEMPAT, TANGGAL LAHIR</th>
+              <th rowspan="2">USIA</th>
+              <th rowspan="2">L/P</th>
+              <th rowspan="2">JABATAN</th>
+              <th colspan="3">WILAYAH KERJA</th>
+              <th rowspan="2">PNS/CPNS/PPPK/PHL</th>
+              <th rowspan="2">PENUGASAN SEBELUMNYA</th>
+              <th rowspan="2">PEND. TERAKHIR</th>
+              <th rowspan="2">KETERANGAN</th>
+            </tr>
+            <tr>
+              <th>RUAS</th>
+              <th>SALURAN</th>
+              <th>BANGUNAN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>SUDA RSO, S.IP</td>
+              <td>AIK DAREK, 28 APRIL 1978</td>
+              <td>47</td>
+              <td>L</td>
+              <td>PENGAMAT</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>PNS</td>
+              <td>TETAP</td>
+              <td>S1</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>SUFIENTI</td>
+              <td>DONGGALA, 30 SEPTEMBER 1997</td>
+              <td>27</td>
+              <td>P</td>
+              <td>STAF PENGAMAT</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>CPNS</td>
+              <td>BELUM BEKERJA</td>
+              <td>SMA</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>SEPTIA SUMARTI</td>
+              <td>BANGGAI, 18 SEPTEMBER 1988</td>
+              <td>36</td>
+              <td>P</td>
+              <td>STAF PENGAMAT</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>PPPK</td>
+              <td>DI. MENTAWA</td>
+              <td>S1</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>I GUSTI NGURAH SUARMAJA, SP</td>
+              <td>SINDANG SARI, 14 JANUARI 1991</td>
+              <td>34</td>
+              <td>L</td>
+              <td>STAF PENGAMAT</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>PHL</td>
+              <td>TETAP</td>
+              <td>S1</td>
+              <td>IKUT UJIAN PPPK TAHAP 2</td>
+            </tr>
+            <tr>
+              <td rowspan="7">5</td>
+              <td rowspan="7">I GUSTI NYOMAN BUDIARTANA</td>
+              <td rowspan="7">BADUNG, 17 JUNI 1973</td>
+              <td rowspan="7">52</td>
+              <td rowspan="7">L</td>
+              <td rowspan="7">JURU</td>
+              <td>BD 0 - BD 1</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 0/INLATE</td>
+              <td rowspan="7">PNS</td>
+              <td rowspan="7">TETAP</td>
+              <td rowspan="7">SMA Paket C</td>
+              <td rowspan="7"></td>
+            </tr>
+            <tr>
+              <td>BD 1 - BD 2</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 1</td>
+            </tr>
+            <tr>
+              <td>BD 2 - BD 1</td>
+              <td>SAL. SEKUNDER BP</td>
+              <td>BP 1</td>
+            </tr>
+            <tr>
+              <td>BP 1 - BMP 1</td>
+              <td>SAL. SEKUNDER BP</td>
+              <td>BMP 1</td>
+            </tr>
+            <tr>
+              <td>BP 1 - BMP 1 TG</td>
+              <td>SAL. SEKUNDER BP</td>
+              <td>BMP 1 TG</td>
+            </tr>
+            <tr>
+              <td>BD 2 - BD 3</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 3</td>
+            </tr>
+            <tr>
+              <td>BD 3 - BD 4</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 4</td>
+            </tr>
+            <tr>
+              <td rowspan="10">6</td>
+              <td rowspan="10">DESI PURNAMASARI A.Md.T</td>
+              <td rowspan="10">ENREKANG. 1 DESEMBER 1997</td>
+              <td rowspan="10">27</td>
+              <td rowspan="10">P</td>
+              <td rowspan="10">JURU</td>
+              <td>BD 4- BD 5</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 5</td>
+              <td rowspan="10">CPNS</td>
+              <td rowspan="10">BELUM KERJA</td>
+              <td rowspan="10">D3</td>
+              <td rowspan="10"></td>
+            </tr>
+            <tr>
+              <td>BD 5 - BMD 4</td>
+              <td>SAL.SEKUNDER MD</td>
+              <td>BMD 5</td>
+            </tr>
+            <tr>
+              <td>BMD 5 - BMD 6</td>
+              <td>SAL.SEKUNDER MD</td>
+              <td>BMD 6</td>
+            </tr>
+            <tr>
+              <td>BMD 6 - BMDM 6</td>
+              <td>SAL.SEKUNDER MD</td>
+              <td>BMD 6</td>
+            </tr>
+            <tr>
+              <td>BD 5 - BD 6</td>
+              <td>SAL.PRIMER DONGIN</td>
+              <td>BD 6</td>
+            </tr>
+            <tr>
+              <td>BD 6 - BD 7</td>
+              <td>SAL.PRIMER DONGIN</td>
+              <td>BD 7</td>
+            </tr>
+            <tr>
+              <td>BD 7 - BMD 7</td>
+              <td>SAL.SEKUNDER MD</td>
+              <td>BMD 7</td>
+            </tr>
+            <tr>
+              <td>BD 6 - BD 1b</td>
+              <td>SAL. SEKUNDER TIRTA SARI</td>
+              <td>BT 1b</td>
+            </tr>
+            <tr>
+              <td>BT 1b - BT 1</td>
+              <td>SAL.SEKUNDER TIRTA SARI</td>
+              <td>BT 1</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>SUPLESI BD 7</td>
+              <td>SUPLESI BD 7</td>
+            </tr>
+            <tr>
+              <td rowspan="10">7</td>
+              <td rowspan="10">ASWAN FERDIYANTO EKA SANJAYA</td>
+              <td rowspan="10">SULAWESI SELATAN, MARET 1978</td>
+              <td rowspan="10">47</td>
+              <td rowspan="10">L</td>
+              <td rowspan="10">JURU</td>
+              <td></td>
+              <td>SUPLESI BT 1b</td>
+              <td>SUPLESI BT 1b</td>
+              <td rowspan="10">PPPK</td>
+              <td rowspan="10">TETAP</td>
+              <td rowspan="10">S1</td>
+              <td rowspan="10"></td>
+            </tr>
+            <tr>
+              <td>BT 1 - BT 2</td>
+              <td>SAL.SEKUNDER TIRTA SARI</td>
+              <td>BT 2</td>
+            </tr>
+            <tr>
+              <td>BT 2 - BT 3</td>
+              <td>SAL SEKUNDER TIRTA SARI</td>
+              <td>BT 3</td>
+            </tr>
+            <tr>
+              <td>BT 3 - BT 4</td>
+              <td>SAL.SEKUNDER TIRTA SARI</td>
+              <td>BT 4</td>
+            </tr>
+            <tr>
+              <td>BT 4 - BT 5</td>
+              <td>SEL.SEKUNDER TIRTA SARI</td>
+              <td>BT 5</td>
+            </tr>
+            <tr>
+              <td>BT 5 - BPW 3</td>
+              <td>SAL.SEKUNDER PANDANWANGI</td>
+              <td>BPW 3</td>
+            </tr>
+            <tr>
+              <td>BPW 3 - BT 6</td>
+              <td>SAL.SEKUNDER TIRTA SARI</td>
+              <td>BT 6</td>
+            </tr>
+            <tr>
+              <td>BPW 3 - BPW 4</td>
+              <td>SAL.SEKUNDER PANDANWANGI</td>
+              <td>BPW 4</td>
+            </tr>
+            <tr>
+              <td>BPW 4 - BPW 5</td>
+              <td>SAL.SEKUNDER PANDANWANGI</td>
+              <td>BPW 5</td>
+            </tr>
+            <tr>
+              <td>BPW 5 - BPW 6</td>
+              <td>SAL.SEKUNDER PANDANWANGI</td>
+              <td>BPW 6</td>
+            </tr>
+            <tr>
+              <td rowspan="3">8</td>
+              <td rowspan="3">CHABIRUN</td>
+              <td rowspan="3">PURBALINGA, 11 SEPTEMBER 1972</td>
+              <td rowspan="3">53</td>
+              <td rowspan="3">L</td>
+              <td rowspan="3">POB</td>
+              <td></td>
+              <td>BENDUNG DONGIN</td>
+              <td>BENDUNG DONGIN</td>
+              <td rowspan="3">PHL</td>
+              <td rowspan="3">TETAP</td>
+              <td rowspan="3">SMA PAKET C</td>
+              <td rowspan="3">IKUT UJIAN PPPK TAHAP 1</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>BD 0/INLATE</td>
+              <td>BD 0/INLATE</td>
+            </tr>
+            <tr>
+              <td>BD 0 - BD 1</td>
+              <td>SAL.PRIMER DONGIN</td>
+              <td>BD 1</td>
+            </tr>
+            <tr>
+              <td rowspan="5">9</td>
+              <td rowspan="5">FIDELIS HAMIN</td>
+              <td rowspan="5">MANGGARAI, 16 NOVEMBER 1968</td>
+              <td rowspan="5">57</td>
+              <td rowspan="5">L</td>
+              <td rowspan="5">PPA</td>
+              <td>BT 5 - BPW 3</td>
+              <td>SAL.SEKUNDER PANDAWANGI</td>
+              <td>BPW 3</td>
+              <td rowspan="5">PNS</td>
+              <td rowspan="5">TETAP</td>
+              <td rowspan="5">SMA PAKET C</td>
+              <td rowspan="5"></td>
+            </tr>
+            <tr>
+              <td>BPW 3 - BPW 6</td>
+              <td>SAL.SEKUNDER TIRTA SARI</td>
+              <td>BT 6</td>
+            </tr>
+            <tr>
+              <td>BPW 3 - BPW 4</td>
+              <td>SAL.SEKUNDER PANDAWANGI</td>
+              <td>BPW 4</td>
+            </tr>
+            <tr>
+              <td>BPW 4 - BPW 5</td>
+              <td>SAL.SEKUNDER PANDAWANGI</td>
+              <td>BPW 5</td>
+            </tr>
+            <tr>
+              <td>BPW 5 - BPW 6</td>
+              <td>SAL.SEKUNDER PANDAWANGI</td>
+              <td>BPW 6</td>
+            </tr>
+            <tr>
+              <td rowspan="4">10</td>
+              <td rowspan="4">I WAYAN SUKARJA</td>
+              <td rowspan="4">TINGKAP BATU, 16 DESEMBER 1967</td>
+              <td rowspan="4">57</td>
+              <td rowspan="4">L</td>
+              <td rowspan="4">PPA</td>
+
+              <td>BT 1 - BT 2</td>
+              <td>SAL. SEKUNDER TIRTA SARI</td>
+              <td>BT 2</td>
+
+              <td rowspan="4">PNS</td>
+              <td rowspan="4">TETAP</td>
+              <td rowspan="4">SMA PAKET C</td>
+              <td rowspan="4"></td>
+            </tr>
+            <tr>
+              <td>BT 2 - BT 3</td>
+              <td>SAL. SEKUNDER TIRTA SARI</td>
+              <td>BT 3</td>
+            </tr>
+            <tr>
+              <td>BT 3 - BT 4</td>
+              <td>SAL. SEKUNDER TIRTA SARI</td>
+              <td>BT 4</td>
+            </tr>
+            <tr>
+              <td>BT 4 - BT 5</td>
+              <td>SAL. SEKUNDER TIRTA SARI</td>
+              <td>BT 5</td>
+            </tr>
+
+            <!-- 11. GEOVANY HARLEMOY -->
+            <tr>
+              <td rowspan="2">11</td>
+              <td rowspan="2">GEOVANY HARLEMOY</td>
+              <td rowspan="2">BANGGAI, 14 MARET 1997</td>
+              <td rowspan="2">28</td>
+              <td rowspan="2">L</td>
+              <td rowspan="2">PPA</td>
+
+              <td>BD 6 - BT 1b</td>
+              <td>SAL. SEKUNDER TIRTA SARI</td>
+              <td>BT 1b</td>
+
+              <td rowspan="2">PPPK</td>
+              <td rowspan="2">TETAP</td>
+              <td rowspan="2">SMA</td>
+              <td rowspan="2"></td>
+            </tr>
+            <tr>
+              <td>BT 1b - BT 1</td>
+              <td>SAL. SEKUNDER TIRTA SARI</td>
+              <td>BT 1</td>
+            </tr>
+
+            <!-- 12. I WAYAN ADNYANA -->
+            <!-- 12. I WAYAN ADNYANA -->
+            <tr>
+              <td rowspan="4">12</td>
+              <td rowspan="4">I WAYAN ADNYANA</td>
+              <td rowspan="4">TABANAN, 30 AGUSTUS 1979</td>
+              <td rowspan="4">45</td>
+              <td rowspan="4">L</td>
+              <td rowspan="4">PPA</td>
+
+              <td>BD 1 - BD 2</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 2</td>
+
+              <td rowspan="4">PPPK</td>
+              <td rowspan="4">DI. MENTAWA</td>
+              <td rowspan="4">SMU</td>
+              <td rowspan="4"></td>
+            </tr>
+            <tr>
+              <td>BD 2 - BP 1</td>
+              <td>SAL. SEKUNDER BP</td>
+              <td>BP 1</td>
+            </tr>
+            <tr>
+              <td>BP 1 - BMP 1</td>
+              <td>SAL. SEKUNDER BP</td>
+              <td>BMP 1</td>
+            </tr>
+            <tr>
+              <td>BP 1 - BMP 1 TG</td>
+              <td>SAL. SEKUNDER BP</td>
+              <td>BMP 1 TG</td>
+            </tr>
+
+            <!-- 13. ALAMSYAH -->
+            <tr>
+              <td rowspan="6">13</td>
+              <td rowspan="6">ALAMSYAH</td>
+              <td rowspan="6">LOLU, 20 MARET 1983</td>
+              <td rowspan="6">42</td>
+              <td rowspan="6">L</td>
+              <td rowspan="6">PPA</td>
+
+              <td>BD 5 - BMD 5</td>
+              <td>SAL. SEKUNDER MD</td>
+              <td>BMD 5</td>
+
+              <td rowspan="6">PPPK</td>
+              <td rowspan="6">DINAS PERTANIAN</td>
+              <td rowspan="6">SPP. PERTANIAN</td>
+              <td rowspan="6"></td>
+            </tr>
+            <tr>
+              <td>BD 5 - BMD 6</td>
+              <td>SAL. SEKUNDER MD</td>
+              <td>BMD 6</td>
+            </tr>
+            <tr>
+              <td>BMD 6 - BMDM 6</td>
+              <td>SAL. SEKUNDER MD</td>
+              <td>BMDM 6</td>
+            </tr>
+            <tr>
+              <td>BD 5 - BD 6</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 6</td>
+            </tr>
+            <tr>
+              <td>BD 6 - BD 7</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 7</td>
+            </tr>
+            <tr>
+              <td>BD 7 - BMD 7</td>
+              <td>SAL. SEKUNDER MD</td>
+              <td>BMD 7</td>
+            </tr>
+
+            <!-- 14. SUJONO -->
+            <tr>
+              <td rowspan="3">14</td>
+              <td rowspan="3">SUJONO</td>
+              <td rowspan="3">LEMPEH, 1 JANUARI 1970</td>
+              <td rowspan="3">55</td>
+              <td rowspan="3">L</td>
+              <td rowspan="3">PPA</td>
+
+              <td>BD 2 - BD 3</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 3</td>
+
+              <td rowspan="3">PHL</td>
+              <td rowspan="3">TETAP</td>
+              <td rowspan="3">SMEA</td>
+              <td rowspan="3">IKUT</td>
+            </tr>
+            <tr>
+              <td>BD 3 - BD 4</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 4</td>
+            </tr>
+            <tr>
+              <td>BD 4 - BD 5</td>
+              <td>SAL. PRIMER DONGIN</td>
+              <td>BD 5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Modal Grafik -->
+    <div id="grafikModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Statistik Pegawai</h2>
+
+        <div class="chart-box">
+          <h3>Jenis Kelamin</h3>
+          <canvas id="genderChart"></canvas>
+          <div id="genderInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box">
+          <h3>Jabatan</h3>
+          <canvas id="jabatanChart"></canvas>
+          <div id="jabatanInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box">
+          <h3>Status Kepegawaian</h3>
+          <canvas id="statusChart"></canvas>
+          <div id="statusInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box">
+          <h3>Pendidikan Terakhir</h3>
+          <canvas id="pendidikanChart"></canvas>
+          <div id="pendidikanInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box big">
+          <h3>Kategori Usia</h3>
+          <canvas id="usiaChart"></canvas>
+          <div id="usiaInfo" class="chart-info"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Fungsi Search
+      function searchTable() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let table = document.getElementById("pegawaiTable");
+        let rows = table.getElementsByTagName("tr");
+        let firstMatch = null;
+        for (let i = 1; i < rows.length; i++) {
+          let namaCell = rows[i].getElementsByTagName("td")[1];
+          if (namaCell) {
+            let nama = namaCell.textContent || namaCell.innerText;
+            if (nama.toLowerCase().indexOf(input) > -1) {
+              rows[i].style.display = "";
+              if (!firstMatch) firstMatch = rows[i];
+            } else {
+              rows[i].style.display = "none";
+            }
+          }
+        }
+        if (firstMatch) {
+          firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+          firstMatch.style.backgroundColor = "#ffff99";
+        }
+      }
+      function resetTable() {
+        let rows = document
+          .getElementById("pegawaiTable")
+          .getElementsByTagName("tr");
+        for (let i = 1; i < rows.length; i++) {
+          rows[i].style.display = "";
+          rows[i].style.backgroundColor = "";
+        }
+        document.getElementById("searchInput").value = "";
+      }
+
+      // Modal
+      function openModal() {
+        document.getElementById("grafikModal").style.display = "block";
+        loadCharts();
+      }
+      function closeModal() {
+        document.getElementById("grafikModal").style.display = "none";
+      }
+
+      // Ambil Data dari Tabel
+      function getTableData() {
+        let rows = document
+          .getElementById("pegawaiTable")
+          .getElementsByTagName("tr");
+        let gender = { L: 0, P: 0 };
+        let jabatan = {};
+        let status = {};
+        let pendidikan = {};
+        let usia = {
+          "15-24 Tahun (Usia Muda)": 0,
+          "25-34 Tahun (Pekerja Awal)": 0,
+          "35-44 Tahun (Paruh Baya)": 0,
+          "45-54 Tahun (Pra Pensiun)": 0,
+          "55-64 Tahun (Pensiun)": 0,
+        };
+        for (let i = 1; i < rows.length; i++) {
+          let cells = rows[i].getElementsByTagName("td");
+          if (cells.length > 0) {
+            let g = cells[4]?.innerText;
+            let j = cells[5]?.innerText;
+            let s = cells[9]?.innerText;
+            let p = cells[11]?.innerText;
+            let u = parseInt(cells[3]?.innerText);
+            if (g) gender[g] = (gender[g] || 0) + 1;
+            if (j) jabatan[j] = (jabatan[j] || 0) + 1;
+            if (s) status[s] = (status[s] || 0) + 1;
+            if (p) pendidikan[p] = (pendidikan[p] || 0) + 1;
+            if (!isNaN(u)) {
+              if (u >= 15 && u <= 24) usia["15-24 Tahun (Usia Muda)"]++;
+              else if (u <= 34) usia["25-34 Tahun (Pekerja Awal)"]++;
+              else if (u <= 44) usia["35-44 Tahun (Paruh Baya)"]++;
+              else if (u <= 54) usia["45-54 Tahun (Pra Pensiun)"]++;
+              else if (u <= 64) usia["55-64 Tahun (Pensiun)"]++;
+            }
+          }
+        }
+        return { gender, jabatan, status, pendidikan, usia };
+      }
+
+      // Tampilkan Info di bawah Chart
+      function generateInfo(labels, values, targetId) {
+        let total = values.reduce((a, b) => a + b, 0);
+        let html = labels
+          .map((label, i) => {
+            let count = values[i];
+            let percent = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
+            return `${label}: ${count} orang (${percent}%)`;
+          })
+          .join("<br>");
+        document.getElementById(targetId).innerHTML = html;
+      }
+
+      // Load Chart.js
+      function loadCharts() {
+        let data = getTableData();
+
+        // Gender
+        let gL = Object.keys(data.gender),
+          gV = Object.values(data.gender);
+        new Chart(document.getElementById("genderChart"), {
+          type: "pie",
+          data: {
+            labels: gL,
+            datasets: [
+              {
+                data: gV,
+                backgroundColor: ["#4cafef", "#f54291"],
+              },
+            ],
+          },
+        });
+        generateInfo(gL, gV, "genderInfo");
+
+        // Jabatan
+        let jL = Object.keys(data.jabatan),
+          jV = Object.values(data.jabatan);
+        new Chart(document.getElementById("jabatanChart"), {
+          type: "pie",
+          data: {
+            labels: jL,
+            datasets: [
+              {
+                data: jV,
+                backgroundColor: [
+                  "#ffcc00",
+                  "#26a69a",
+                  "#ba68c8",
+                  "#ff7043",
+                  "#ffee58",
+                  "#29b6f6",
+                  "#8e24aa",
+                ],
+              },
+            ],
+          },
+        });
+        generateInfo(jL, jV, "jabatanInfo");
+
+        // Status
+        let sL = Object.keys(data.status),
+          sV = Object.values(data.status);
+        new Chart(document.getElementById("statusChart"), {
+          type: "pie", // ← diubah jadi pie
+          data: {
+            labels: sL,
+            datasets: [
+              {
+                data: sV,
+                backgroundColor: ["#ff9800", "#8bc34a", "#e91e63", "#2196f3"],
+              },
+            ],
+          },
+        });
+        generateInfo(sL, sV, "statusInfo");
+
+        // Pendidikan
+        let pL = Object.keys(data.pendidikan),
+          pV = Object.values(data.pendidikan);
+        new Chart(document.getElementById("pendidikanChart"), {
+          type: "pie", // ← diubah jadi pie
+          data: {
+            labels: pL,
+            datasets: [
+              {
+                data: pV,
+                backgroundColor: [
+                  "#009688",
+                  "#ff7043",
+                  "#42a5f5",
+                  "#ab47bc",
+                  "#66bb6a",
+                ],
+              },
+            ],
+          },
+        });
+        generateInfo(pL, pV, "pendidikanInfo");
+
+        // Usia
+        let uL = Object.keys(data.usia),
+          uV = Object.values(data.usia);
+        new Chart(document.getElementById("usiaChart"), {
+          type: "pie",
+          data: {
+            labels: uL,
+            datasets: [
+              {
+                data: uV,
+                backgroundColor: [
+                  "#4caf50",
+                  "#2196f3",
+                  "#ff9800",
+                  "#9c27b0",
+                  "#f44336",
+                ],
+              },
+            ],
+          },
+        });
+        generateInfo(uL, uV, "usiaInfo");
+      }
+    </script>
+  </body>
+</html>

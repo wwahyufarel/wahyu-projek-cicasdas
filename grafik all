@@ -1,0 +1,450 @@
+<tr>
+    <td>1</td>
+    <td>SUDA RSO, S.IP</td>
+    <td>AIK DAREK, 28 APRIL 1978</td>
+    <td>47</td>
+    <td>L</td>
+    <td>PENGAMAT</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>PNS</td>
+    <td>TETAP</td>
+    <td>S1</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>SUFIENTI</td>
+    <td>DONGGALA, 30 SEPTEMBER 1997</td>
+    <td>27</td>
+    <td>P</td>
+    <td>STAF PENGAMAT</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>CPNS</td>
+    <td>BELUM BEKERJA</td>
+    <td>SMA</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>SEPTIA SUMARTI</td>
+    <td>BANGGAI, 18 SEPTEMBER 1988</td>
+    <td>36</td>
+    <td>P</td>
+    <td>STAF PENGAMAT</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>PPPK</td>
+    <td>DI. MENTAWA</td>
+    <td>S1</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>I GUSTI NGURAH SUARMAJA, SP</td>
+    <td>SINDANG SARI, 14 JANUARI 1991</td>
+    <td>34</td>
+    <td>L</td>
+    <td>STAF PENGAMAT</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>PHL</td>
+    <td>TETAP</td>
+    <td>S1</td>
+    <td>IKUT UJIAN PPPK TAHAP 2</td>
+  </tr>
+  <tr>
+    <td rowspan="7">5</td>
+    <td rowspan="7">I GUSTI NYOMAN BUDIARTANA</td>
+    <td rowspan="7">BADUNG, 17 JUNI 1973</td>
+    <td rowspan="7">52</td>
+    <td rowspan="7">L</td>
+    <td rowspan="7">JURU</td>
+    <td>BD 0 - BD 1</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 0/INLATE</td>
+    <td rowspan="7">PNS</td>
+    <td rowspan="7">TETAP</td>
+    <td rowspan="7">SMA Paket C</td>
+    <td rowspan="7"></td>
+  </tr>
+  <tr>
+    <td>BD 1 - BD 2</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 1</td>
+  </tr>
+  <tr>
+    <td>BD 2 - BD 1</td>
+    <td>SAL. SEKUNDER BP</td>
+    <td>BP 1</td>
+  </tr>
+  <tr>
+    <td>BP 1 - BMP 1</td>
+    <td>SAL. SEKUNDER BP</td>
+    <td>BMP 1</td>
+  </tr>
+  <tr>
+    <td>BP 1 - BMP 1 TG</td>
+    <td>SAL. SEKUNDER BP</td>
+    <td>BMP 1 TG</td>
+  </tr>
+  <tr>
+    <td>BD 2 - BD 3</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 3</td>
+  </tr>
+  <tr>
+    <td>BD 3 - BD 4</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 4</td>
+  </tr>
+  <tr>
+    <td rowspan="10">6</td>
+    <td rowspan="10">DESI PURNAMASARI A.Md.T</td>
+    <td rowspan="10">ENREKANG. 1 DESEMBER 1997</td>
+    <td rowspan="10">27</td>
+    <td rowspan="10">P</td>
+    <td rowspan="10">JURU</td>
+    <td>BD 4- BD 5</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 5</td>
+    <td rowspan="10">CPNS</td>
+    <td rowspan="10">BELUM KERJA</td>
+    <td rowspan="10">D3</td>
+    <td rowspan="10"></td>
+  </tr>
+  <tr>
+    <td>BD 5 - BMD 4</td>
+    <td>SAL.SEKUNDER MD</td>
+    <td>BMD 5</td>
+  </tr>
+  <tr>
+    <td>BMD 5 - BMD 6</td>
+    <td>SAL.SEKUNDER MD</td>
+    <td>BMD 6</td>
+  </tr>
+  <tr>
+    <td>BMD 6 - BMDM 6</td>
+    <td>SAL.SEKUNDER MD</td>
+    <td>BMD 6</td>
+  </tr>
+  <tr>
+    <td>BD 5 - BD 6</td>
+    <td>SAL.PRIMER DONGIN</td>
+    <td>BD 6</td>
+  </tr>
+  <tr>
+    <td>BD 6 - BD 7</td>
+    <td>SAL.PRIMER DONGIN</td>
+    <td>BD 7</td>
+  </tr>
+  <tr>
+    <td>BD 7 - BMD 7</td>
+    <td>SAL.SEKUNDER MD</td>
+    <td>BMD 7</td>
+  </tr>
+  <tr>
+    <td>BD 6 - BD 1b</td>
+    <td>SAL. SEKUNDER TIRTA SARI</td>
+    <td>BT 1b</td>
+  </tr>
+  <tr>
+    <td>BT 1b - BT 1</td>
+    <td>SAL.SEKUNDER TIRTA SARI</td>
+    <td>BT 1</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>SUPLESI BD 7</td>
+    <td>SUPLESI BD 7</td>
+  </tr>
+  <tr>
+    <td rowspan="10">7</td>
+    <td rowspan="10">ASWAN FERDIYANTO EKA SANJAYA</td>
+    <td rowspan="10">SULAWESI SELATAN, MARET 1978</td>
+    <td rowspan="10">47</td>
+    <td rowspan="10">L</td>
+    <td rowspan="10">JURU</td>
+    <td></td>
+    <td>SUPLESI BT 1b</td>
+    <td>SUPLESI BT 1b</td>
+    <td rowspan="10">PPPK</td>
+    <td rowspan="10">TETAP</td>
+    <td rowspan="10">S1</td>
+    <td rowspan="10"></td>
+  </tr>
+  <tr>
+    <td>BT 1 - BT 2</td>
+    <td>SAL.SEKUNDER TIRTA SARI</td>
+    <td>BT 2</td>
+  </tr>
+  <tr>
+    <td>BT 2 - BT 3</td>
+    <td>SAL SEKUNDER TIRTA SARI</td>
+    <td>BT 3</td>
+  </tr>
+  <tr>
+    <td>BT 3 - BT 4</td>
+    <td>SAL.SEKUNDER TIRTA SARI</td>
+    <td>BT 4</td>
+  </tr>
+  <tr>
+    <td>BT 4 - BT 5</td>
+    <td>SEL.SEKUNDER TIRTA SARI</td>
+    <td>BT 5</td>
+  </tr>
+  <tr>
+    <td>BT 5 - BPW 3</td>
+    <td>SAL.SEKUNDER PANDANWANGI</td>
+    <td>BPW 3</td>
+  </tr>
+  <tr>
+    <td>BPW 3 - BT 6</td>
+    <td>SAL.SEKUNDER TIRTA SARI</td>
+    <td>BT 6</td>
+  </tr>
+  <tr>
+    <td>BPW 3 - BPW 4</td>
+    <td>SAL.SEKUNDER PANDANWANGI</td>
+    <td>BPW 4</td>
+  </tr>
+  <tr>
+    <td>BPW 4 - BPW 5</td>
+    <td>SAL.SEKUNDER PANDANWANGI</td>
+    <td>BPW 5</td>
+  </tr>
+  <tr>
+    <td>BPW 5 - BPW 6</td>
+    <td>SAL.SEKUNDER PANDANWANGI</td>
+    <td>BPW 6</td>
+  </tr>
+  <tr>
+    <td rowspan="3">8</td>
+    <td rowspan="3">CHABIRUN</td>
+    <td rowspan="3">PURBALINGA, 11 SEPTEMBER 1972</td>
+    <td rowspan="3">53</td>
+    <td rowspan="3">L</td>
+    <td rowspan="3">POB</td>
+    <td></td>
+    <td>BENDUNG DONGIN</td>
+    <td>BENDUNG DONGIN</td>
+    <td rowspan="3">PHL</td>
+    <td rowspan="3">TETAP</td>
+    <td rowspan="3">SMA PAKET C</td>
+    <td rowspan="3">IKUT UJIAN PPPK TAHAP 1</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>BD 0/INLATE</td>
+    <td>BD 0/INLATE</td>
+  </tr>
+  <tr>
+    <td>BD 0 - BD 1</td>
+    <td>SAL.PRIMER DONGIN</td>
+    <td>BD 1</td>
+  </tr>
+  <tr>
+    <td rowspan="5">9</td>
+    <td rowspan="5">FIDELIS HAMIN</td>
+    <td rowspan="5">MANGGARAI, 16 NOVEMBER 1968</td>
+    <td rowspan="5">57</td>
+    <td rowspan="5">L</td>
+    <td rowspan="5">PPA</td>
+    <td>BT 5 - BPW 3</td>
+    <td>SAL.SEKUNDER PANDAWANGI</td>
+    <td>BPW 3</td>
+    <td rowspan="5">PNS</td>
+    <td rowspan="5">TETAP</td>
+    <td rowspan="5">SMA PAKET C</td>
+    <td rowspan="5"></td>
+  </tr>
+  <tr>
+    <td>BPW 3 - BPW 6</td>
+    <td>SAL.SEKUNDER TIRTA SARI</td>
+    <td>BT 6</td>
+  </tr>
+  <tr>
+    <td>BPW 3 - BPW 4</td>
+    <td>SAL.SEKUNDER PANDAWANGI</td>
+    <td>BPW 4</td>
+  </tr>
+  <tr>
+    <td>BPW 4 - BPW 5</td>
+    <td>SAL.SEKUNDER PANDAWANGI</td>
+    <td>BPW 5</td>
+  </tr>
+  <tr>
+    <td>BPW 5 - BPW 6</td>
+    <td>SAL.SEKUNDER PANDAWANGI</td>
+    <td>BPW 6</td>
+  </tr>
+  <tr>
+    <td rowspan="4">10</td>
+    <td rowspan="4">I WAYAN SUKARJA</td>
+    <td rowspan="4">TINGKAP BATU, 16 DESEMBER 1967</td>
+    <td rowspan="4">57</td>
+    <td rowspan="4">L</td>
+    <td rowspan="4">PPA</td>
+
+    <td>BT 1 - BT 2</td>
+    <td>SAL. SEKUNDER TIRTA SARI</td>
+    <td>BT 2</td>
+
+    <td rowspan="4">PNS</td>
+    <td rowspan="4">TETAP</td>
+    <td rowspan="4">SMA PAKET C</td>
+    <td rowspan="4"></td>
+  </tr>
+  <tr>
+    <td>BT 2 - BT 3</td>
+    <td>SAL. SEKUNDER TIRTA SARI</td>
+    <td>BT 3</td>
+  </tr>
+  <tr>
+    <td>BT 3 - BT 4</td>
+    <td>SAL. SEKUNDER TIRTA SARI</td>
+    <td>BT 4</td>
+  </tr>
+  <tr>
+    <td>BT 4 - BT 5</td>
+    <td>SAL. SEKUNDER TIRTA SARI</td>
+    <td>BT 5</td>
+  </tr>
+
+  <!-- 11. GEOVANY HARLEMOY -->
+  <tr>
+    <td rowspan="2">11</td>
+    <td rowspan="2">GEOVANY HARLEMOY</td>
+    <td rowspan="2">BANGGAI, 14 MARET 1997</td>
+    <td rowspan="2">28</td>
+    <td rowspan="2">L</td>
+    <td rowspan="2">PPA</td>
+
+    <td>BD 6 - BT 1b</td>
+    <td>SAL. SEKUNDER TIRTA SARI</td>
+    <td>BT 1b</td>
+
+    <td rowspan="2">PPPK</td>
+    <td rowspan="2">TETAP</td>
+    <td rowspan="2">SMA</td>
+    <td rowspan="2"></td>
+  </tr>
+  <tr>
+    <td>BT 1b - BT 1</td>
+    <td>SAL. SEKUNDER TIRTA SARI</td>
+    <td>BT 1</td>
+  </tr>
+
+  <!-- 12. I WAYAN ADNYANA -->
+ <!-- 12. I WAYAN ADNYANA -->
+<tr>
+  <td rowspan="4">12</td>
+  <td rowspan="4">I WAYAN ADNYANA</td>
+  <td rowspan="4">TABANAN, 30 AGUSTUS 1979</td>
+  <td rowspan="4">45</td>
+  <td rowspan="4">L</td>
+  <td rowspan="4">PPA</td>
+
+  <td>BD 1 - BD 2</td>
+  <td>SAL. PRIMER DONGIN</td>
+  <td>BD 2</td>
+
+  <td rowspan="4">PPPK</td>
+  <td rowspan="4">DI. MENTAWA</td>
+  <td rowspan="4">SMU</td>
+  <td rowspan="4"></td>
+</tr>
+<tr>
+  <td>BD 2 - BP 1</td>
+  <td>SAL. SEKUNDER BP</td>
+  <td>BP 1</td>
+</tr>
+<tr>
+  <td>BP 1 - BMP 1</td>
+  <td>SAL. SEKUNDER BP</td>
+  <td>BMP 1</td>
+</tr>
+<tr>
+  <td>BP 1 - BMP 1 TG</td>
+  <td>SAL. SEKUNDER BP</td>
+  <td>BMP 1 TG</td>
+</tr>
+
+
+  <!-- 13. ALAMSYAH -->
+  <tr>
+    <td rowspan="6">13</td>
+    <td rowspan="6">ALAMSYAH</td>
+    <td rowspan="6">LOLU, 20 MARET 1983</td>
+    <td rowspan="6">42</td>
+    <td rowspan="6">L</td>
+    <td rowspan="6">PPA</td>
+
+    <td>BD 5 - BMD 5</td>
+    <td>SAL. SEKUNDER MD</td>
+    <td>BMD 5</td>
+
+    <td rowspan="6">PPPK</td>
+    <td rowspan="6">DINAS PERTANIAN</td>
+    <td rowspan="6">SPP. PERTANIAN</td>
+    <td rowspan="6"></td>
+  </tr>
+  <tr>
+    <td>BD 5 - BMD 6</td>
+    <td>SAL. SEKUNDER MD</td>
+    <td>BMD 6</td>
+  </tr>
+  <tr>
+    <td>BMD 6 - BMDM 6</td>
+    <td>SAL. SEKUNDER MD</td>
+    <td>BMDM 6</td>
+  </tr>
+  <tr>
+    <td>BD 5 - BD 6</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 6</td>
+  </tr>
+  <tr>
+    <td>BD 6 - BD 7</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 7</td>
+  </tr>
+  <tr>
+    <td>BD 7 - BMD 7</td>
+    <td>SAL. SEKUNDER MD</td>
+    <td>BMD 7</td>
+  </tr>
+
+  <!-- 14. SUJONO -->
+  <tr>
+    <td rowspan="3">14</td>
+    <td rowspan="3">SUJONO</td>
+    <td rowspan="3">LEMPEH, 1 JANUARI 1970</td>
+    <td rowspan="3">55</td>
+    <td rowspan="3">L</td>
+    <td rowspan="3">PPA</td>
+
+    <td>BD 2 - BD 3</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 3</td>
+
+    <td rowspan="3">PHL</td>
+    <td rowspan="3">TETAP</td>
+    <td rowspan="3">SMEA</td>
+    <td rowspan="3">IKUT</td>
+  </tr>
+  <tr>
+    <td>BD 3 - BD 4</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 4</td>
+  </tr>
+  <tr>
+    <td>BD 4 - BD 5</td>
+    <td>SAL. PRIMER DONGIN</td>
+    <td>BD 5</td>
+  </tr>

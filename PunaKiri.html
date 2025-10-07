@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Daftar Kepegawaian</title>
+    <link rel="stylesheet" href="Kepegawaian.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Search box kecil di kanan atas tabel */
+      .search-container {
+        text-align: right;
+        margin-bottom: 10px;
+      }
+      .search-container input {
+        padding: 3px;
+        font-size: 12px;
+      }
+      .search-container button {
+        padding: 3px 8px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      /* Modal Grafik */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .modal-content {
+        background: #fff;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 1000px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative; /* untuk close button */
+      }
+
+      /* Tombol close (X) */
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 26px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #333;
+      }
+      .close:hover {
+        color: red;
+      }
+
+      /* Grafik tersusun vertikal */
+      .chart-box {
+        text-align: center;
+        width: 100%;
+        margin: 20px 0;
+      }
+      .chart-box canvas {
+        max-width: 360px !important; /* lebih besar */
+        max-height: 360px !important;
+        margin: 0 auto;
+      }
+      .chart-info {
+        font-size: 13px;
+        margin-top: 6px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================== HERO DAN MENU ================== -->
+    <div class="hero">
+      <div class="hero-content">
+        <h1>DAFTAR KEPEGAWAIAN</h1>
+        <h2>Petugas OP WIL II</h2>
+      </div>
+      <!-- Tombol menu -->
+      <div class="menu">
+        <button><a href="PunaKiri.html">Puna kiri</a></button>
+        <button><a href="Karopa.html">Karopa</a></button>
+        <button><a href="Bakung.Html">Bakung</a></button>
+        <button><a href="Ungkaya.html">Ungkaya</a></button>
+        <button><a href="Gintu.html">Gintu</a></button>
+        <button><a href="dongin.html">Dongin</a></button>
+        <button><a href="Tolisu.html">Tolisu</a></button>
+        <button><a href="Toili.html">Toili</a></button>
+        <button><a href="Moilong.html">Moilong</a></button>
+        <button><a href="Karongkasa.html">Karongkasa</a></button>
+        <button><a href="Saroso.html">Saroso</a></button>
+        <button><a href="BellaBunta.html">Bella bunta</a></button>
+        <button><a href="Tamboyali.html">Tamboyali</a></button>
+        <button>
+          <a href="Grafik.keseluruhan.html">GRAFIK KESELURUHAN</a>
+        </button>
+      </div>
+    </div>
+
+    <!-- ================== TABLE KEPEGAWAIAN (TIDAK DIUBAH) ================== -->
+    <section class="table-section">
+      <h2>DATA PEGAWAI (PUNA KIRI)</h2>
+      <div style="margin-bottom: 10px">
+        <button
+          onclick="openModal()"
+          style="
+            padding: 6px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: none;
+            background-color: #564caf;
+            color: white;
+          "
+        >
+          Grafik
+        </button>
+      </div>
+
+      <!-- Search Box -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari Nama pegawai ..."
+        />
+        <button onclick="searchTable()">Search</button>
+        <button
+          onclick="resetTable()"
+          style="padding: 4px 8px; font-size: 12px"
+        >
+          Reset
+        </button>
+      </div>
+      <div class="table-container">
+        <table id="pegawaiTable">
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>NAMA</th>
+              <th>TEMPAT, TGL LAHIR</th>
+              <th>USIA (TAHUN)</th>
+              <th>L/P</th>
+              <th>JABATAN</th>
+              <th>WILAYAH KERJA</th>
+              <th>PNS/CPNS/PPPK/PHL</th>
+              <th>PENUGASAN SEBELUMNYA</th>
+              <th>PENDIDIKAN TERAKHIR</th>
+              <th>KET</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>SARJIO</td>
+              <td>SAMIGALUH, 27 APRIL 1969</td>
+              <td>56</td>
+              <td>L</td>
+              <td>PENGAMAT</td>
+              <td>D.I PUNA KIRI</td>
+              <td>PNS</td>
+              <td>-</td>
+              <td>STM</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>LINTOMAWO BADJALABUA</td>
+              <td>PANTANGOLEMBA, 06 APRIL 1969</td>
+              <td>56</td>
+              <td>L</td>
+              <td>STAF PENGAMAT</td>
+              <td>D.I PUNA KIRI</td>
+              <td>PNS</td>
+              <td>-</td>
+              <td>SLTA</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>SRI WAHYUNI</td>
+              <td>PALU, 02 FEBRUARI 1987</td>
+              <td>38</td>
+              <td>P</td>
+              <td>STAF PENGAMAT</td>
+              <td>D.I PUNA KIRI</td>
+              <td>PPPK</td>
+              <td>-</td>
+              <td>S2 HUKUM</td>
+              <td>IKUT UJIAN PPPK TAHAP 1</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>MARWAH ZAINUDIN</td>
+              <td>LAWORENG, 10 APRIL 2001</td>
+              <td>24</td>
+              <td>P</td>
+              <td>STAF PENGAMAT</td>
+              <td>D.I PUNA KIRI</td>
+              <td>CPNS</td>
+              <td></td>
+              <td>SMK</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>KENY FLOWERS FAUSY</td>
+              <td>UJUNG PANDANG, 10 NOVEMBER 1986</td>
+              <td>38</td>
+              <td>P</td>
+              <td>STAF PENGAMAT</td>
+              <td>D.I PUNA KIRI</td>
+              <td>CPNS</td>
+              <td>TP-OP CIKASDA</td>
+              <td>SLTA</td>
+              <td>Ikut ujian PPPK tahap 1</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>FAHRUL UQIANTO</td>
+              <td>POSO, 28 AGUSTUS 1992</td>
+              <td>33</td>
+              <td>L</td>
+              <td>JURU I</td>
+              <td>
+                BPNkr 1, BPNkr 2, BPNkr 3, BPNkr 4, BPNkr 5, BPNkr 6, BPL 1, dan
+                BPL 2
+              </td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>TEKNIK SIPIL</td>
+              <td>-</td>
+            </tr>
+            <td>7</td>
+            <td>KASIM NURSEHA AMSA</td>
+            <td>BONE, 24 JANUARI 1996</td>
+            <td>29</td>
+            <td>L</td>
+            <td>JURU II</td>
+            <td>BPNkr 7,BPNkr 8,BPNkr 9,BPNkr 10, dan BSA 1</td>
+            <td>CPNS</td>
+            <td>KARYAWAN SWASTA</td>
+            <td>D3 TEKNIK SIPIL</td>
+            <td>-</td>
+            <tr>
+              <td>8</td>
+              <td>IDRUS RISU</td>
+              <td>SAATU, 15 JULI 1967</td>
+              <td>58</td>
+              <td>L</td>
+              <td>JURU III</td>
+              <td>
+                BPNkr 11,BPNkr 12, BPNkr 13, BPNkr 14, BPNkr 15, BMA 1, BSB 1,
+                dan BSB 2
+              </td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>SMK</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>FEBRIANTO</td>
+              <td>MANINILI, 12 FEBRUARI 1990</td>
+              <td>34</td>
+              <td>L</td>
+              <td>POB</td>
+              <td>BENDUNG PUNA dan BENDUNG SUPLESI MAO</td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>SLTA</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>PANJI AHMAD SANTOSO</td>
+              <td>KASIGUNCU, 10 JANUARI 2000</td>
+              <td>25</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 1,BPNkr 2, dan BPNkr 3</td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>S1 TEKNIK SIPIL</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>SAPTO LANGGENG PRAYITNO</td>
+              <td>PADALEMBARA, 9 JULI 1988</td>
+              <td>37</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 4, dan BPNkr 5</td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>SMKN</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>DENDY SETIAWAN</td>
+              <td>SAMBO, 18 JULI 1988</td>
+              <td>37</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 6, BPL 1, dan BPL 2</td>
+              <td>PPPK</td>
+              <td>Security CIKASDA</td>
+              <td>SMK</td>
+              <td>Ikut ujian PPPK tahap 1</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>ADITYA PRATAMA</td>
+              <td>LANTOJAYA, 24 MEI 1997</td>
+              <td>28</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 7, dan BPNkr 8</td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>SMK</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>RENDY DWI PUTRA</td>
+              <td>TOWERA, 13 JANUARI 1995</td>
+              <td>30</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 9 , dan BPNkr 10</td>
+              <td>PPPK</td>
+              <td>INSPEKTORAT</td>
+              <td>SLTA</td>
+              <td>Ikut ujian PPPK tahap 1</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>FREDINANT LADADO</td>
+              <td>SAATU, 4 Desember 1970</td>
+              <td>54</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 11, BPNkr 12, daN BPNkr 13</td>
+              <td>PPPK</td>
+              <td>-</td>
+              <td>SLTA</td>
+              <td>Ikut ujian PPPK tahap 1</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>MUHAMAD ASRI</td>
+              <td>POSO, 3 April 1999</td>
+              <td>26</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkR 9, dan BSA 1</td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>SMK</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>NOFRAN KALAENA</td>
+              <td>DULUMAI, 15 NOVEMBER 1996</td>
+              <td>28</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 14, BSB 1, dan BSB 2</td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>SMK</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>YOZAN KURNIAWAN</td>
+              <td>PALU, 7 DESEMBER 1999</td>
+              <td>25</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BPNkr 14, BPNkr 15, dan BMA 1</td>
+              <td>PPPK</td>
+              <td>INSPEKTORAT</td>
+              <td>SLTA</td>
+              <td>Ikut Ujian PPPK tahap 1</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>VALDO KARAO</td>
+              <td>PINEDAPA, 9 Okteber 1991</td>
+              <td>32</td>
+              <td>L</td>
+              <td>PPA</td>
+              <td>BENDUNG SUPLESI MASANE</td>
+              <td>PHL</td>
+              <td>-</td>
+              <td>SLTA</td>
+              <td>-</td>
+            </tr>
+
+            <!-- Tambahkan data lain sesuai kebutuhan -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- ================== MODAL GRAFIK ================== -->
+    <div id="grafikModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Statistik Pegawai</h2>
+
+        <div class="chart-box">
+          <h3>Jenis Kelamin</h3>
+          <canvas id="genderChart"></canvas>
+          <div id="genderInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box">
+          <h3>Jabatan</h3>
+          <canvas id="jabatanChart"></canvas>
+          <div id="jabatanInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box">
+          <h3>Status Kepegawaian</h3>
+          <canvas id="statusChart"></canvas>
+          <div id="statusInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box">
+          <h3>Pendidikan Terakhir</h3>
+          <canvas id="pendidikanChart"></canvas>
+          <div id="pendidikanInfo" class="chart-info"></div>
+        </div>
+
+        <div class="chart-box big">
+          <h3>Kategori Usia</h3>
+          <canvas id="usiaChart"></canvas>
+          <div id="usiaInfo" class="chart-info"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ================== Fungsi Search ==================
+      function searchTable() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let table = document.getElementById("pegawaiTable");
+        let rows = table.getElementsByTagName("tr");
+        let firstMatch = null;
+
+        for (let i = 1; i < rows.length; i++) {
+          let namaCell = rows[i].getElementsByTagName("td")[1]; // kolom Nama
+          let jabatanCell = rows[i].getElementsByTagName("td")[5]; // kolom Jabatan
+
+          if (namaCell && jabatanCell) {
+            let nama = namaCell.textContent.toLowerCase();
+            let jabatan = jabatanCell.textContent.toLowerCase();
+
+            if (nama.indexOf(input) > -1 || jabatan.indexOf(input) > -1) {
+              rows[i].style.display = "";
+              if (!firstMatch) {
+                firstMatch = rows[i];
+              }
+            } else {
+              rows[i].style.display = "none";
+            }
+          }
+        }
+
+        if (firstMatch) {
+          firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+          firstMatch.style.backgroundColor = "#ffff99";
+        }
+      }
+
+      function resetTable() {
+        let table = document.getElementById("pegawaiTable");
+        let rows = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) {
+          rows[i].style.display = "";
+          rows[i].style.backgroundColor = "";
+        }
+
+        document.getElementById("searchInput").value = "";
+      }
+
+      // ================== Modal ==================
+      function openModal() {
+        document.getElementById("grafikModal").style.display = "block";
+        loadCharts();
+      }
+
+      function closeModal() {
+        document.getElementById("grafikModal").style.display = "none";
+      }
+
+      // ================== Chart.js ==================
+      function getTableData() {
+        let table = document.getElementById("pegawaiTable");
+        let rows = table.getElementsByTagName("tr");
+
+        let gender = { L: 0, P: 0 };
+        let jabatan = {};
+        let status = {};
+        let pendidikan = {};
+        let usia = {
+          "15-24 Tahun (Usia Muda)": 0,
+          "25-34 Tahun (Pekerja Awal)": 0,
+          "35-44 Tahun (Paruh Baya)": 0,
+          "45-58 Tahun (Pra Pensiun)": 0,
+        };
+
+        for (let i = 1; i < rows.length; i++) {
+          let cells = rows[i].getElementsByTagName("td");
+          if (cells.length > 0) {
+            let g = cells[4].innerText;
+            let j = cells[5].innerText;
+            let s = cells[7].innerText;
+            let p = cells[9].innerText;
+            let u = parseInt(cells[3].innerText);
+
+            if (g) gender[g] = (gender[g] || 0) + 1;
+            if (j) jabatan[j] = (jabatan[j] || 0) + 1;
+            if (s) status[s] = (status[s] || 0) + 1;
+            if (p) pendidikan[p] = (pendidikan[p] || 0) + 1;
+            if (!isNaN(u)) {
+              if (u >= 15 && u <= 24) usia["15-24 Tahun (Usia Muda)"]++;
+              else if (u >= 25 && u <= 34) usia["25-34 Tahun (Pekerja Awal)"]++;
+              else if (u >= 35 && u <= 44) usia["35-44 Tahun (Paruh Baya)"]++;
+              else if (u >= 45 && u <= 58) usia["45-58 Tahun (Pra Pensiun)"]++;
+            }
+          }
+        }
+
+        return { gender, jabatan, status, pendidikan, usia };
+      }
+
+      function createChart(ctx, type, data, textBoxId) {
+        new Chart(ctx, {
+          type: type,
+          data: data,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    let value = tooltipItem.raw;
+                    let total = tooltipItem.chart._metasets[0].total;
+                    let percent = ((value / total) * 100).toFixed(1);
+                    return `${tooltipItem.label}: ${value} orang (${percent}%)`;
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        let total = data.datasets[0].data.reduce((a, b) => a + b, 0);
+        let html = "";
+        data.labels.forEach((label, i) => {
+          let value = data.datasets[0].data[i];
+          let percent = ((value / total) * 100).toFixed(1);
+          html += `${label}: ${value} orang (${percent}%)<br>`;
+        });
+        document.getElementById(textBoxId).innerHTML = html;
+      }
+
+      function loadCharts() {
+        let { gender, jabatan, status, pendidikan, usia } = getTableData();
+
+        createChart(
+          document.getElementById("genderChart"),
+          "pie",
+          {
+            labels: Object.keys(gender),
+            datasets: [
+              {
+                data: Object.values(gender),
+                backgroundColor: ["#36A2EB", "#FF6384"],
+              },
+            ],
+          },
+          "genderInfo"
+        );
+
+        createChart(
+          document.getElementById("jabatanChart"),
+          "pie",
+          {
+            labels: Object.keys(jabatan),
+            datasets: [
+              {
+                data: Object.values(jabatan),
+                backgroundColor: ["#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"],
+              },
+            ],
+          },
+          "jabatanInfo"
+        );
+
+        createChart(
+          document.getElementById("statusChart"),
+          "pie",
+          {
+            labels: Object.keys(status),
+            datasets: [
+              {
+                data: Object.values(status),
+                backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56", "#4BC0C0"],
+              },
+            ],
+          },
+          "statusInfo"
+        );
+
+        createChart(
+          document.getElementById("pendidikanChart"),
+          "pie",
+          {
+            labels: Object.keys(pendidikan),
+            datasets: [
+              {
+                data: Object.values(pendidikan),
+                backgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#9966FF",
+                  "#4BC0C0",
+                ],
+              },
+            ],
+          },
+          "pendidikanInfo"
+        );
+
+        createChart(
+          document.getElementById("usiaChart"),
+          "pie",
+          {
+            labels: Object.keys(usia),
+            datasets: [
+              {
+                data: Object.values(usia),
+                backgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#9966FF",
+                  "#4BC0C0",
+                ],
+              },
+            ],
+          },
+          "usiaInfo"
+        );
+      }
+    </script>
+  </body>
+</html>
